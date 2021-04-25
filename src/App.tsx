@@ -22,7 +22,9 @@ import {
   Icon28BrainOutline,
   Icon28Users3Outline,
   Icon28HorseToyOutline,
+  Icon28HeartCircleOutline,
 } from '@vkontakte/icons'
+
 const App = () => {
   const { viewWidth } = useAdaptivity()
   const [activePanel, setActivePanel] = useState('main')
@@ -68,9 +70,17 @@ const App = () => {
                     Как там партнеры?
                   </Cell>
                 </Group>
-                <Cell onClick={() => setActivePanel('talkiiing')}>
-                  /talkiiing, 2021
-                </Cell>
+                <Group
+                  header={<Header mode="secondary">Кто в команде?</Header>}
+                >
+                  <Cell
+                    before={<Icon28HeartCircleOutline />}
+                    onClick={() => setActivePanel('talkiiing')}
+                    description={'Команда'}
+                  >
+                    reportWebVitals.js
+                  </Cell>
+                </Group>
               </Panel>
               <Panel id="what-is">
                 <PanelHeader
@@ -83,13 +93,23 @@ const App = () => {
                 </PanelHeader>
                 <Group>
                   <Div>
-                    <Text weight="semibold" className="text-justify"  style={{ marginBottom: 20 }}>
-                      Такая штука, как <code>Вездекод</code> от ВКонтакте
-                      это одни из самых масштабных соревнований в России!
+                    <Text
+                      weight="semibold"
+                      className="text-justify"
+                      style={{ marginBottom: 20 }}
+                    >
+                      Такая штука, как <code>Вездекод</code> от ВКонтакте это
+                      одни из самых масштабных соревнований в России!
                     </Text>
-                    <Text weight="regular" className="text-justify" style={{ marginBottom: 16 }}>
-                      В нем принимает участие огромное количество человек, из совершенно разных областей!
-                      От Web-разработки и проектирования API до робототехники и информационной безопасности!
+                    <Text
+                      weight="regular"
+                      className="text-justify"
+                      style={{ marginBottom: 16 }}
+                    >
+                      В нем принимает участие огромное количество человек, из
+                      совершенно разных областей! От Web-разработки и
+                      проектирования API до робототехники и информационной
+                      безопасности!
                     </Text>
                   </Div>
                 </Group>
@@ -160,15 +180,30 @@ const App = () => {
                     <PanelHeaderBack onClick={() => setActivePanel('main')} />
                   }
                 >
-                  /talkiiing
+                  reportWebVitals.js
                 </PanelHeader>
                 <Group header={<Header mode="tertiary">О команде</Header>}>
-                  <Cell description="/talkiiing">reportWebVitals.js</Cell>
+                  <Cell description="На базе" onClick={() => window.open('//github.com/talkiiing')}>/talkiiing</Cell>
                 </Group>
                 <Group header={<Header mode="tertiary">Состав команды</Header>}>
-                  <Cell description="@roamiiing">Виталий Лёвкин</Cell>
-                  <Cell description="@talkenson">Виталий Шаталов</Cell>
-                  <Cell description="@nerlihmax">Максим Нерлих</Cell>
+                  <Cell
+                    description="@roamiiing"
+                    onClick={() => window.open('//t.me/roamiiing')}
+                  >
+                    Виталий Лёвкин
+                  </Cell>
+                  <Cell
+                    description="@talkenson"
+                    onClick={() => window.open('//t.me/talkenson')}
+                  >
+                    Виталий Шаталов
+                  </Cell>
+                  <Cell
+                    description="@nerlihmax"
+                    onClick={() => window.open('//t.me/nerlihmax')}
+                  >
+                    Максим Нерлих
+                  </Cell>
                 </Group>
               </Panel>
             </View>
