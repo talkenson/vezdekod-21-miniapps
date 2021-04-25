@@ -27,12 +27,9 @@ const Looper = ({ goBack }: { goBack: () => any }) => {
   const [tickMap, setTickMap] = useState<boolean[]>([])
 
   useEffect(() => {
-    console.log(tick, tickMap[tick])
     if (tickMap[tick]) {
-      console.log('1')
       bridge.send('VKWebAppFlashSetLevel', { level: 1.0 })
     } else {
-      console.log('0')
       bridge.send('VKWebAppFlashSetLevel', { level: 0 })
     }
     active && setTimeout(() => doTick(), 1000)
@@ -40,7 +37,6 @@ const Looper = ({ goBack }: { goBack: () => any }) => {
 
   useEffect(() => {
     setTickMap(Array(ticks).fill(false))
-    console.log(tick)
   }, [ticks])
 
   const doTick = async () => {
@@ -86,15 +82,13 @@ const Looper = ({ goBack }: { goBack: () => any }) => {
           {tickMap.map((v, i) => (
             <Button
               key={i}
-              mode={tick === i ? 'tertiary' : v ? 'commerce' : 'secondary'}
+              mode={tick === i ? 'outline' : v ? 'commerce' : 'secondary'}
               onClick={() =>
                 setTickMap((m) => m.map((v, ind) => (i === ind ? !v : v)))
               }
               style={{ marginLeft: '4px', marginRight: '4px' }}
               size={'s'}
-            >
-              {!v ? '-' : '+'}
-            </Button>
+            >{' '}</Button>
           ))}
         </Div>
       </Group>
