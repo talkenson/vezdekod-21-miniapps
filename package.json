@@ -11,7 +11,7 @@
     "@types/node": "^12.20.10",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
-    "@vkontakte/icons": "^1.93.0",
+    "@vkontakte/icons": "^1.91.0",
     "@vkontakte/vkui": "^4.5.0",
     "classnames": "^2.3.1",
     "node-sass": "^5.0.0",
@@ -20,7 +20,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "typescript": "^4.2.4",
-    "web-vitals": "^1.1.1"
+    "web-vitals": "^1.1.1",
+    "@vkontakte/vkjs": "^0.20.0"
   },
   "scripts": {
     "start": "craco start",
@@ -53,5 +54,11 @@
     "postcss": "^7.0.35",
     "prettier": "^2.2.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.2"
+  },
+  "peerDependencies": {
+    "@vkontakte/icons": "^1.91.0",
+    "@vkontakte/vk-bridge": "^2.0.2",
+    "@vkontakte/vkjs": "^0.20.0",
+    "prop-types": "^15.6.1"
   }
 }
