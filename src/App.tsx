@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import './App.css'
 import Card from './components/Card/Card'
 import {
@@ -23,11 +23,27 @@ import {
   Icon28Users3Outline,
   Icon28HorseToyOutline,
   Icon28HeartCircleOutline,
+  Icon28KeyboardBotsOutline
 } from '@vkontakte/icons'
+import Looper from "./components/Looper/Looper";
+import bridge, {UserInfo} from '@vkontakte/vk-bridge'
 
 const App = () => {
   const { viewWidth } = useAdaptivity()
   const [activePanel, setActivePanel] = useState('main')
+  const [user, setUser] = useState<UserInfo>()
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  useEffect(() => {
+    console.log(user)
+  }, [user])
+
+  const fetchData = async () => {
+    bridge.send('VKWebAppGetUserInfo', {}).then(r => setUser(r))
+  }
 
   return (
     <>
@@ -43,6 +59,9 @@ const App = () => {
                   header={<Header mode="secondary">Общая информация</Header>}
                 >
                   <Div>
+                    {user ? <Text weight="regular" style={{ marginBottom: 16 }}>
+                      Привет, {user.first_name}!
+                    </Text> : <></>}
                     <Text weight="regular" style={{ marginBottom: 16 }}>
                       Это VK Mini App для <code>Вездекода</code> от ВКонтакте!
                       Оно собрано на VKUI, вау, это реально круто и удобно!
@@ -79,6 +98,17 @@ const App = () => {
                     description={'Команда'}
                   >
                     reportWebVitals.js
+                  </Cell>
+                </Group>
+                <Group
+                    header={<Header mode="secondary">Хочу поиграть</Header>}
+                >
+                  <Cell
+                      before={<Icon28KeyboardBotsOutline />}
+                      onClick={() => setActivePanel('looper')}
+                      description={'С фонариком'}
+                  >
+                    Loop-machine
                   </Cell>
                 </Group>
               </Panel>
@@ -205,6 +235,9 @@ const App = () => {
                     Максим Нерлих
                   </Cell>
                 </Group>
+              </Panel>
+              <Panel id="looper">
+                <Looper goBack={() => setActivePanel('main')} />
               </Panel>
             </View>
           </SplitCol>
