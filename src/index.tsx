@@ -7,6 +7,10 @@ import {
   AdaptivityProvider,
   ConfigProvider,
 } from '@vkontakte/vkui'
+import bridge from "@vkontakte/vk-bridge";
+
+
+bridge.send("VKWebAppInit", {});
 
 ReactDOM.render(
   <React.StrictMode>
