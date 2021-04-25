@@ -16,13 +16,13 @@ const Card = ({
 
   return (
     <div
-      className={`relative m-4 mx-auto rounded-2xl card bg-gradient-to-tl 
+      className={`relative m-2 mx-auto rounded-2xl card bg-gradient-to-tl 
       cursor-pointer select-none hover:shadow ${styles.card} ${styles[vals[number]]} ${
         styles[variant || 'extended']
       }`}
     >
       <div
-        className={`absolute text-2xl ${
+        className={`absolute text-2xl text-white ${
           variant !== 'mini' ? 'top-20 left-4' : 'top-4 left-4'
         }`}
       >
