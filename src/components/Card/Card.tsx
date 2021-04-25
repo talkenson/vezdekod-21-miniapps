@@ -13,20 +13,11 @@ const Card = ({
   number: number
   variant?: string
 }) => {
-  const [style, setStyle] = useState('')
-
-  useEffect(() => {
-    setStyle(styles[vals[number]])
-  }, [])
-
-  useEffect(() => {
-    console.log(style)
-  }, [style])
 
   return (
     <div
       className={`relative m-4 mx-auto rounded-2xl card bg-gradient-to-tl 
-      cursor-pointer select-none hover:shadow ${styles.card} ${style} ${
+      cursor-pointer select-none hover:shadow ${styles.card} ${styles[vals[number]]} ${
         styles[variant || 'extended']
       }`}
     >

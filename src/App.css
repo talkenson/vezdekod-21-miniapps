@@ -9,9 +9,10 @@
     transform: translate(-2rem);
 }
 
-.description {
+.content {
     width: fit-content;
 }
+
 
 .vk-logo {
     transform: translate(10rem, 0.25rem);
