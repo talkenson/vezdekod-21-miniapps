@@ -6,6 +6,7 @@
     height: 6rem;
   }
 
+
   &.red {
     @apply from-red-300 to-pink-500;
     box-shadow: 0 0 8px 0 theme('colors.red.300');

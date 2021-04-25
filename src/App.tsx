@@ -1,65 +1,181 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './App.css'
-import vk_logo from './assets/svg/vk_light.svg'
 import Card from './components/Card/Card'
-import { useHistory } from 'react-router-dom'
-
+import {
+  useAdaptivity,
+  AppRoot,
+  SplitLayout,
+  SplitCol,
+  ViewWidth,
+  View,
+  Panel,
+  PanelHeader,
+  Header,
+  Group,
+  Cell,
+  PanelHeaderBack,
+  Div,
+  Text,
+} from '@vkontakte/vkui'
+import '@vkontakte/vkui/dist/vkui.css'
+import {
+  Icon28BrainOutline,
+  Icon28Users3Outline,
+  Icon28HorseToyOutline,
+} from '@vkontakte/icons'
 const App = () => {
+  const { viewWidth } = useAdaptivity()
+  const [activePanel, setActivePanel] = useState('main')
+
   return (
-    <div className="mx-auto text-center App">
-      <a href={'https://vk.com/vezdekod'}>
-        <div className="relative mx-auto mt-16 mb-16 flex flex-col justify-center items-center select-none cursor-pointer">
-          <div className="vezdekod-text text-white z-30 text-6xl font-medium font-light">
-            вездекод
-          </div>
-          <div className="z-10 underliner" />
-          <img src={vk_logo} className="absolute vk-logo z-30" />
-        </div>
-      </a>
-      <div className="content mx-auto w-full max-w-lg lg:max-w-5xl">
-        <div className="description text-white text-left mx-auto text-xl px-6">
-          <p className="font-medium">
-            В этом году на <code>Вездекоде</code> от ВКонтакте представлены
-            задачи аж из 9-ти категорий!
-          </p>
-          <p className="font-normal mt-4">
-            Среди этих категорий встречаются такие особо интересеные как:
-          </p>
-          <div className="w-full w-4 grid grid-cols-1 lg:grid-cols-2 mt-12 mb-12">
-            {[
-              'VK Mini Apps',
-              'Мобильная разработка',
-              'Робототехника',
-              'Информационная безопасность',
-            ].map((v, i) => (
-              <Card title={v} number={i} key={i} />
-            ))}
-          </div>
-          <p className="font-medium mt-16">
-            А еще в этом году у <code>Вездекода</code> куча классных партнеров,
-            вот они все слева направо:
-          </p>
-          <div className="w-full w-4 grid grid-cols-1 lg:grid-cols-2 mt-12 mb-12">
-            {'РУБИКОН, SmartBear, Senla, Веб-интегратор Максимастер, Scloud.ru, DD Planet, Центр информационных технологий, SafeCafe, GDG Russia, Google Dev. Group'
-              .split(',')
-              .map((v, i) => (
-                <Card title={v} number={2} variant={'mini'} key={i} />
-              ))}
-          </div>
-        </div>
-        <p className="mt-16 text-xl font-bold">
-          Хочешь узнать больше о вездекоде?
-        </p>
-        <p className="font-medium mt-4 mb-16 p-4 underline">
-          <a href={'https://vk.com/vezdekod'}>
-            Тыкай на надпись в самом верху, или на это предложение, кек
-          </a>
-        </p>
-        <p className="font-light mt-4 mb-8">
-          <a href={'https://github.com/talkiiing'}>/talkiiing, 2021</a>
-        </p>
-      </div>
-    </div>
+    <>
+      <AppRoot>
+        <SplitLayout header={<PanelHeader separator={false} />}>
+          <SplitCol spaced={viewWidth && viewWidth > ViewWidth.MOBILE}>
+            <View activePanel={activePanel}>
+              <Panel id="main">
+                <PanelHeader>
+                  <code className="text-2xl">Вездекод</code>
+                </PanelHeader>
+                <Group
+                  header={<Header mode="secondary">Общая информация</Header>}
+                >
+                  <Div>
+                    <Text weight="regular" style={{ marginBottom: 16 }}>
+                      Это VK Mini App для <code>Вездекода</code> от ВКонтакте!
+                      Оно собрано на VKUI, вау, это реально круто и удобно!
+                    </Text>
+                  </Div>
+                  <Cell
+                    expandable
+                    before={<Icon28BrainOutline />}
+                    onClick={() => setActivePanel('what-is')}
+                  >
+                    Что такое Вездекод?
+                  </Cell>
+                  <Cell
+                    expandable
+                    before={<Icon28HorseToyOutline />}
+                    onClick={() => setActivePanel('categories')}
+                  >
+                    Что по категориям?
+                  </Cell>
+                  <Cell
+                    expandable
+                    before={<Icon28Users3Outline />}
+                    onClick={() => setActivePanel('partners')}
+                  >
+                    Как там партнеры?
+                  </Cell>
+                </Group>
+                <Cell onClick={() => setActivePanel('talkiiing')}>
+                  /talkiiing, 2021
+                </Cell>
+              </Panel>
+              <Panel id="what-is">
+                <PanelHeader
+                  separator={false}
+                  left={
+                    <PanelHeaderBack onClick={() => setActivePanel('main')} />
+                  }
+                >
+                  Что это такое?
+                </PanelHeader>
+                <Group>
+                  <Div>
+                    <Text weight="semibold" className="text-justify"  style={{ marginBottom: 20 }}>
+                      Такая штука, как <code>Вездекод</code> от ВКонтакте
+                      это одни из самых масштабных соревнований в России!
+                    </Text>
+                    <Text weight="regular" className="text-justify" style={{ marginBottom: 16 }}>
+                      В нем принимает участие огромное количество человек, из совершенно разных областей!
+                      От Web-разработки и проектирования API до робототехники и информационной безопасности!
+                    </Text>
+                  </Div>
+                </Group>
+              </Panel>
+              <Panel id="categories">
+                <PanelHeader
+                  separator={false}
+                  left={
+                    <PanelHeaderBack onClick={() => setActivePanel('main')} />
+                  }
+                >
+                  Категории
+                </PanelHeader>
+                <Group>
+                  <Div>
+                    <Text weight="regular" style={{ marginBottom: 16 }}>
+                      {' '}
+                      В этом году на <code>Вездекоде</code> от ВКонтакте
+                      представлены задачи аж из 9-ти категорий!
+                    </Text>
+                    <Text weight="regular" style={{ marginBottom: 16 }}>
+                      Среди этих категорий встречаются такие особо интересеные
+                      как:
+                    </Text>
+                  </Div>
+
+                  <div className="w-full w-4 grid grid-cols-1 lg:grid-cols-2">
+                    {[
+                      'VK Mini Apps',
+                      'Мобильная разработка',
+                      'Робототехника',
+                      'Информационная безопасность',
+                    ].map((v, i) => (
+                      <Card title={v} number={i} key={i} />
+                    ))}
+                  </div>
+                </Group>
+              </Panel>
+              <Panel id="partners">
+                <PanelHeader
+                  separator={false}
+                  left={
+                    <PanelHeaderBack onClick={() => setActivePanel('main')} />
+                  }
+                >
+                  Партнеры
+                </PanelHeader>
+                <Group>
+                  <Div>
+                    <Text weight="regular" style={{ marginBottom: 16 }}>
+                      А еще в этом году у <code>Вездекода</code> куча классных
+                      партнеров, вот они все слева направо:
+                    </Text>
+                  </Div>
+                  <div className="w-full w-4 grid grid-cols-1 lg:grid-cols-2">
+                    {'РУБИКОН, SmartBear, Senla, Веб-интегратор Максимастер, Scloud.ru, DD Planet, Центр информационных технологий, SafeCafe, GDG Russia, Google Dev. Group'
+                      .split(',')
+                      .map((v, i) => (
+                        <Card title={v} number={2} variant={'mini'} key={i} />
+                      ))}
+                  </div>
+                </Group>
+              </Panel>
+              <Panel id="talkiiing">
+                <PanelHeader
+                  separator={false}
+                  left={
+                    <PanelHeaderBack onClick={() => setActivePanel('main')} />
+                  }
+                >
+                  /talkiiing
+                </PanelHeader>
+                <Group header={<Header mode="tertiary">О команде</Header>}>
+                  <Cell description="/talkiiing">reportWebVitals.js</Cell>
+                </Group>
+                <Group header={<Header mode="tertiary">Состав команды</Header>}>
+                  <Cell description="@roamiiing">Виталий Лёвкин</Cell>
+                  <Cell description="@talkenson">Виталий Шаталов</Cell>
+                  <Cell description="@nerlihmax">Максим Нерлих</Cell>
+                </Group>
+              </Panel>
+            </View>
+          </SplitCol>
+        </SplitLayout>
+      </AppRoot>
+    </>
   )
 }
 
